@@ -54,7 +54,7 @@
     
     secondVC.urlString = _urlString;
     
-    [secondVC.navigationController pushViewController:secondVC animated:YES];
+    [self.navigationController pushViewController:secondVC animated:YES];
 }
 
 - (UIImage*)imageFromImageData{
@@ -63,7 +63,7 @@
     UIImage *tileImgage = [[UIImage alloc] initWithData:imageData];
     
     NSLog(@"image data %@",imageData);
-    NSLog(@"File size is : %.8f KB",(float)imageData.length/1024.0f);
+    NSLog(@"File size is : %.8f KB on index path",(float)imageData.length/1024.0f);
     
     return tileImgage;
 }

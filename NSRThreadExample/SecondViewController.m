@@ -34,6 +34,8 @@
     static NSString* cellID = @"CustomCellTableViewCell";
     CustomCellTableViewCell* cell = (CustomCellTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellID];
     cell.myImageView.image = [self imageFromImageData];
+    NSLog(@"index path %d",indexPath.row);
+
     return cell;
 }
 
@@ -42,7 +44,7 @@
     NSData* imageData = [NSData dataWithContentsOfURL:imageURL];
     UIImage *tileImgage = [[UIImage alloc] initWithData:imageData];
     
-    NSLog(@"image data %@",imageData);
+//    NSLog(@"image data %@",imageData);
     NSLog(@"File size is : %.8f KB",(float)imageData.length/1024.0f);
     
     return tileImgage;
