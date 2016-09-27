@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "SecondViewController.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel* currentValue;
 @property (weak, nonatomic) IBOutlet UISlider* slider;
@@ -47,6 +47,14 @@
     [self downloadImageUsingInvocationOperation];
     
     self.startThreadButton.selected = !self.startThreadButton.selected;
+}
+
+- (IBAction)tappedNextViewController:(UIButton*)sender{
+    SecondViewController* secondVC = [[self storyboard] instantiateViewControllerWithIdentifier:@"SecondViewController"];
+    
+    secondVC.urlString = _urlString;
+    
+    [secondVC.navigationController pushViewController:secondVC animated:YES];
 }
 
 - (UIImage*)imageFromImageData{

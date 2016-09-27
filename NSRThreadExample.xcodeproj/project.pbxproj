@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5095997F1D9A0E110005FFBD /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5095997E1D9A0E110005FFBD /* SecondViewController.m */; };
+		509599821D9A0E4B0005FFBD /* CustomCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 509599811D9A0E4B0005FFBD /* CustomCellTableViewCell.m */; };
 		50F631971D859814003A2F7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F631961D859814003A2F7A /* main.m */; };
 		50F6319A1D859814003A2F7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F631991D859814003A2F7A /* AppDelegate.m */; };
 		50F6319D1D859814003A2F7A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F6319C1D859814003A2F7A /* ViewController.m */; };
@@ -16,6 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5095997D1D9A0E110005FFBD /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		5095997E1D9A0E110005FFBD /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		509599801D9A0E4B0005FFBD /* CustomCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCellTableViewCell.h; sourceTree = "<group>"; };
+		509599811D9A0E4B0005FFBD /* CustomCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCellTableViewCell.m; sourceTree = "<group>"; };
 		50F631921D859814003A2F7A /* NSRThreadExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NSRThreadExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F631961D859814003A2F7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		50F631981D859814003A2F7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -62,6 +68,10 @@
 				50F631991D859814003A2F7A /* AppDelegate.m */,
 				50F6319B1D859814003A2F7A /* ViewController.h */,
 				50F6319C1D859814003A2F7A /* ViewController.m */,
+				5095997D1D9A0E110005FFBD /* SecondViewController.h */,
+				5095997E1D9A0E110005FFBD /* SecondViewController.m */,
+				509599801D9A0E4B0005FFBD /* CustomCellTableViewCell.h */,
+				509599811D9A0E4B0005FFBD /* CustomCellTableViewCell.m */,
 				50F6319E1D859814003A2F7A /* Main.storyboard */,
 				50F631A11D859814003A2F7A /* Assets.xcassets */,
 				50F631A31D859814003A2F7A /* LaunchScreen.storyboard */,
@@ -150,8 +160,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5095997F1D9A0E110005FFBD /* SecondViewController.m in Sources */,
 				50F6319D1D859814003A2F7A /* ViewController.m in Sources */,
 				50F6319A1D859814003A2F7A /* AppDelegate.m in Sources */,
+				509599821D9A0E4B0005FFBD /* CustomCellTableViewCell.m in Sources */,
 				50F631971D859814003A2F7A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,6 +313,7 @@
 				50F631AB1D859814003A2F7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
