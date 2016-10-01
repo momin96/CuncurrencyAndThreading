@@ -11,13 +11,22 @@
 
 @interface SecondViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) UITableView* myTableView;
+@property (strong, nonatomic ) NSCache* cache;
+@property (strong, nonatomic) NSOperationQueue* operationQueue;
 @end
 
 @implementation SecondViewController
 
+- (void)dealloc{
+    NSLog(@"dealloc SecondViewController");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    self.cache = [[NSCache alloc]init];
+    self.operationQueue = [[NSOperationQueue alloc] init];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,12 +41,30 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString* cellID = @"CustomCellTableViewCell";
+
     CustomCellTableViewCell* cell = (CustomCellTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellID];
-    cell.myImageView.image = [self imageFromImageData];
-    NSLog(@"index path %d",indexPath.row);
+    UIImage* image = [self.cache objectForKey:indexPath];
+    if(image){
+        NSLog(@"In main queue");
+        cell.myImageView.image = image;
+    }
+    else{
+//        [self imageDataUsingDispatchQueue:cell indexPath:indexPath];
+        
+        [self imageDataUsingDispatchQueue:cell indexPath:indexPath];
+    }
 
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UIImage* image = [self.cache objectForKey:indexPath];
+    [self.navigationController popViewControllerAnimated:YES];
+    if([self.delegate respondsToSelector:@selector(secondViewController:updateImageWithImage:)])
+        [_delegate secondViewController:self updateImageWithImage:image];
+    
+}
+
 
 - (UIImage*)imageFromImageData{
     NSURL* imageURL = [NSURL URLWithString:_urlString];
@@ -50,4 +77,30 @@
     return tileImgage;
 }
 
+- (void)imageDataUsingDispatchQueue:(CustomCellTableViewCell*)cell indexPath:(NSIndexPath*)indexPath{
+    __weak typeof(self) weakSelf = self;
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        NSLog(@"In background queue");
+        UIImage* image = [weakSelf imageFromImageData];
+        [weakSelf.cache setObject:image forKey:indexPath];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cell.myImageView.image = image;
+        });
+    });
+}
+
+- (void)imageDataUsingOperationQueue:(CustomCellTableViewCell*)cell indexPath:(NSIndexPath*)indexPath{
+    __weak typeof(self) weakSelf = self;
+
+    NSBlockOperation* fetchImageDataOperation = [NSBlockOperation blockOperationWithBlock:^{
+        UIImage* image = [weakSelf imageFromImageData];
+        [weakSelf.cache setObject:image forKey:indexPath];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            cell.myImageView.image = image;
+        }];
+    }];
+    
+    [self.operationQueue addOperation:fetchImageDataOperation];
+}
 @end

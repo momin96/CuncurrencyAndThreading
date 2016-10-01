@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "SecondViewController.h"
-@interface ViewController ()
+@interface ViewController () <SecondViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel* currentValue;
 @property (weak, nonatomic) IBOutlet UISlider* slider;
 @property (weak, nonatomic) IBOutlet UIButton* startThreadButton;
@@ -53,7 +53,7 @@
     SecondViewController* secondVC = [[self storyboard] instantiateViewControllerWithIdentifier:@"SecondViewController"];
     
     secondVC.urlString = _urlString;
-    
+    secondVC.delegate = self;
     [self.navigationController pushViewController:secondVC animated:YES];
 }
 
@@ -110,6 +110,11 @@
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         self.imageView.image = tileImgage;
     }];
+}
+
+
+- (void)secondViewController:(SecondViewController*)secondViewController updateImageWithImage:(UIImage*)image{
+    self.imageView.image = image;
 }
 
 @end

@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+@class SecondViewController;
+@protocol SecondViewControllerDelegate <NSObject>
+
+@optional
+
+- (void)secondViewController:(SecondViewController*)secondViewController updateImageWithImage:(UIImage*)image;
+
+@end
 
 @interface SecondViewController : UIViewController
 @property (strong, nonatomic) NSString* urlString;
+
+@property (strong, nonatomic) id <SecondViewControllerDelegate> delegate;
 @end
